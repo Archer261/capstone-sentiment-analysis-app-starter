@@ -83,4 +83,5 @@ def index():
 
 # Run the Flask application
 # Note: In production, you typically wouldn't run the app directly like this
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5001)
