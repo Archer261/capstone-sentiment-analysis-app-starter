@@ -74,9 +74,27 @@
                             labels: ['Positive', 'Negative'],
                             datasets: [{
                                 data: [{{ sentiment.custom_model_positive }}, {{ 1 - sentiment.custom_model_positive }}],
-                        backgroundColor: ['#10B981', '#EF4444']
+                        backgroundColor: ['#10B981', '#EF4444']  // Green for positive, Red for negative
                     }]
+                        },
+                        options: {
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += (context.parsed * 100).toFixed(2) + '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
                         }
+                    }
                     });
                 </script>
                 {% endif %}
